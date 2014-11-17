@@ -17,6 +17,7 @@
         android:textSize="25dp"/>
 
     <TextView
+        android:id="@+id/enter_subreddit_prompt"
         android:text="@string/enter_subreddit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,6 +27,7 @@
         android:textColor="@android:color/black"/>
 
     <Button
+        android:id="@+id/submit_subbreddit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/subreddit_edittext"
