@@ -75,8 +75,7 @@ public class RedditAPI extends AsyncTask<Object, Void, String> {
             Log.v("NULL TAG", "null search results in Etsy post ex");
         }
         else {
-            RedditJSONparse jsonData = new RedditJSONparse();
-            jsonData.setSearchResults(searchResult);
+            RedditJSONparse jsonData = new RedditJSONparse(redditResults);
             ArrayList<RedditObjects> redditResultsArray = jsonData.parseJson();
             onDataLoadedListener.dataLoaded(redditResultsArray);
         }
