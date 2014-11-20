@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.republicofreluctantghosts.admin.redditcaller.Activities.APIcalls.RedditAPI;
 import com.republicofreluctantghosts.admin.redditcaller.Activities.Models.RedditObjects;
 import com.republicofreluctantghosts.admin.redditcaller.R;
 
@@ -23,7 +24,7 @@ import java.util.List;
  */
 public class SearchResultsFragment extends ListFragment {
 
-    private final String POSTS = "posts";
+    private final String SUBREDDIT_TAG = "subreddit name";
     private final String REDDIT_OBJECT = "reddit object";
     private List<RedditObjects> redditPosts = new ArrayList<RedditObjects>();
 
@@ -36,7 +37,15 @@ public class SearchResultsFragment extends ListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         final ResultsAdapter adapter = new ResultsAdapter(getActivity(), redditPosts);
         setListAdapter(adapter);
-        getArguments().getParcelableArrayList(POSTS);
+        RedditAPI redditAPI = new RedditAPI(getArguments().getString(SUBREDDIT_TAG), new RedditAPI.OnDataLoadedListener() {
+            @Override
+            public void dataLoaded(ArrayList<RedditObjects> redditObjectsArrayList) {
+                adapter.clear();
+                adapter.addAll(redditObjectsArrayList);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        redditAPI.execute();
     }
 
     @Override
